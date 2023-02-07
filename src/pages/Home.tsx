@@ -49,6 +49,16 @@ export function Home() {
     );
   };
 
+  const handleEditTask = (taskId: number, taskNewTitle: string) => {
+    const taskListChecked = tasks.map((task) => ({ ...task }));
+
+    const taskIndex = taskListChecked.find((item) => item.id === taskId);
+
+    if (taskIndex) taskIndex.title = taskNewTitle;
+
+    setTasks(taskListChecked);
+  };
+
   return (
     <View style={styles.container}>
       <Header tasksCounter={tasks.length} />
@@ -57,6 +67,7 @@ export function Home() {
 
       <TasksList
         tasks={tasks}
+        editTask={handleEditTask}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
       />
